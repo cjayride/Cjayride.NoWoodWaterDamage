@@ -1,6 +1,6 @@
 # No Wood Water Damage
 
-Wood, hardwood, and timberwood building pieces no longer lose health from standing in water. A dock stays at full health in clear weather. Rain on an unroofed piece on land still wears it. Ship hulls are left alone.
+Wood, hardwood, and timberwood building pieces no longer lose health from standing in water or sitting at the waterline (docks), including rain wear on those pieces. Rain on an unroofed piece on dry land still wears it. Ship hulls are left alone.
 
 Wear is applied by whoever owns the piece, so this goes on **clients and the dedicated server**.
 
