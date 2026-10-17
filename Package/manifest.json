@@ -1,6 +1,6 @@
 {
   "name": "NoWoodWaterDamage",
-  "version_number": "1.0.1",
+  "version_number": "1.1.0",
   "website_url": "https://discord.gg/cjayride",
   "description": "Wood, hardwood, and timberwood no longer take wet wear in water or at the waterline (docks). Rain on dry land still wears unroofed wood. Client and dedicated server.",
   "dependencies": [

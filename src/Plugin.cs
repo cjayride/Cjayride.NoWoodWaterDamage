@@ -1,4 +1,5 @@
 using BepInEx;
+using BepInEx.Configuration;
 using HarmonyLib;
 using UnityEngine;
 
@@ -9,21 +10,40 @@ namespace Cjayride.NoWoodWaterDamage
     {
         public const string PluginGuid = "cjayride.NoWoodWaterDamage";
         public const string PluginName = "No Wood Water Damage";
-        public const string PluginVersion = "1.0.1";
+        public const string PluginVersion = "1.1.0";
+
+        public static ConfigEntry<bool> PreventAllWeatherDamage { get; private set; }
+        public static ConfigEntry<bool> ProtectAtWaterline { get; private set; }
 
         private void Awake()
         {
+            // By default the mod prevents all water related damage (rain, snow, weather, seasons).
+            PreventAllWeatherDamage = Config.Bind(
+                "General", "PreventAllWeatherDamage", true,
+                "When enabled, ALL wood/hardwood/timberwood pieces are immune to rain and weather damage everywhere, not just at the waterline. Set to false to only protect at the waterline.");
+
+            // Existing behavior - protect pieces sitting at or below water surface
+            ProtectAtWaterline = Config.Bind(
+                "General", "ProtectAtWaterline", true,
+                "Protect wood pieces at the waterline (docks, shore). Leave this true even if PreventAllWeatherDamage is true.");
+
+            Config.Save();
+
             new Harmony(PluginGuid).PatchAll();
-            Logger.LogInfo("Wood, hardwood, and timberwood pieces no longer wear from water or rain while at the waterline (docks). Rain on dry land is unchanged.");
+
+            if (PreventAllWeatherDamage.Value)
+                Logger.LogInfo("All wood/hardwood/timberwood pieces are fully immune to rain and weather damage everywhere.");
+            else if (ProtectAtWaterline.Value)
+                Logger.LogInfo("Wood protection limited to the waterline only. Rain on dry land still causes wear.");
+            else
+                Logger.LogWarning("All wood protection disabled in config. Wood will take normal weather damage.");
         }
     }
 
     /// <summary>
     /// WearNTear treats rain and submersion as the same wet state, then chips 5% health
     /// every 60 seconds while the piece is above half health and unroofed.
-    /// <see cref="WearNTear.IsUnderWater"/> is only true when the piece origin is below the
-    /// surface, so dock planks at the waterline still counted as wet from rain. Ships keep vanilla wear.
-    /// The piece owner runs this, so both the client and the dedicated server need it.
+    /// Both the client and the dedicated server need this mod for full protection.
     /// </summary>
     [HarmonyPatch(typeof(WearNTear), nameof(WearNTear.IsWet))]
     internal static class SkipSubmergedWood
@@ -42,11 +62,23 @@ namespace Cjayride.NoWoodWaterDamage
                 && material != WearNTear.MaterialType.Timberwood)
                 return;
 
+            // Ships always keep vanilla wear behaviour
             if (__instance.GetComponentInParent<Ship>() != null)
                 return;
 
-            if (__instance.IsUnderWater() || IsAtWaterline(__instance))
+            // If full protection is enabled, block ALL weather damage immediately
+            if (Plugin.PreventAllWeatherDamage.Value)
+            {
                 __result = false;
+                return;
+            }
+
+            // Fallback: only protect pieces at or below the waterline
+            if (Plugin.ProtectAtWaterline.Value)
+            {
+                if (IsAtWaterline(__instance))
+                    __result = false;
+            }
         }
 
         private static bool IsAtWaterline(WearNTear piece)

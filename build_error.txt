@@ -1,0 +1,1 @@
+I realize the project XML is incomplete – it’s missing the opening <PropertyGroup> and the closing tags are misaligned.
