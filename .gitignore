@@ -2,6 +2,7 @@ bin/
 obj/
 *.user
 Environment.props
+libs/
 Package/*.dll
 dist/package/
 dist/*.zip
