@@ -10,7 +10,7 @@ namespace Cjayride.NoWoodWaterDamage
     {
         public const string PluginGuid = "cjayride.NoWoodWaterDamage";
         public const string PluginName = "No Wood Water Damage";
-        public const string PluginVersion = "1.1.0";
+        public const string PluginVersion = "1.1.1";
 
         public static ConfigEntry<bool> PreventAllWeatherDamage { get; private set; }
         public static ConfigEntry<bool> ProtectAtWaterline { get; private set; }

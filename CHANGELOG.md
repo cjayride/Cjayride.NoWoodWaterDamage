@@ -1,3 +1,7 @@
+## 1.1.1
+- Verified against Valheim 1.0.21 (Release build).
+- BepInEx dependency set to `denikson-BepInExPack_Valheim-5.4.2360`.
+
 ## 1.1.0
 - **NEW:** `PreventAllWeatherDamage` config (default true) blocks ALL rain/weather/seasons wear on wood everywhere, not just at the waterline.
 - **NEW:** `ProtectAtWaterline` config (default true) lets you control the original waterline-only protection independently.

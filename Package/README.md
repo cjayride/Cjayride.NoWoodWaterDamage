@@ -1,23 +1,67 @@
-# No Wood Water Damage
+# 🌧️ No Wood Water Damage
 
-Wood, hardwood, and timberwood building pieces no longer lose health from standing in water or sitting at the waterline (docks), including rain wear on those pieces. Rain on an unroofed piece on dry land still wears it. Ship hulls are left alone.
+### Protect Your Wooden Builds from the Elements
 
-Wear is applied by whoever owns the piece, so this goes on **clients and the dedicated server**.
+No Wood Water Damage prevents wood, hardwood, and timberwood building pieces from deteriorating due to rain, weather, seasons, or water exposure.
 
-## Requires
+Keep your docks, waterfront buildings, and wooden structures looking their best without constantly repairing weathered pieces.
 
-- [BepInExPack for Valheim](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/)
+- **Global weather protection:** Prevents rain, weather, and seasonal wear on wooden building pieces everywhere.
+- **Waterline protection:** Optionally protects pieces at or near the water's surface.
+- **Ship hulls unchanged:** Ships retain their vanilla damage behavior.
+- **Configurable behavior:** Enable or disable each protection mode independently.
 
-## Install
+> **Installation requirement:** Install this mod on both the client and dedicated server.
 
-**Thunderstore, Gale, or r2modman:** install the package.
+## ⚙️ Configuration
 
-**Nexus or a manual zip:** copy `plugins/cjayride-NoWoodWaterDamage` into `Valheim/BepInEx/plugins`. You should end up with:
+Configuration is stored in:
 
+`BepInEx/config/cjayride.NoWoodWaterDamage.cfg`
+
+The file is generated automatically on first launch.
+
+| Setting | Default | Description |
+|---|---|---|
+| `PreventAllWeatherDamage` | `true` | Prevents rain, weather, and seasonal wear on all covered wooden pieces, regardless of location. |
+| `ProtectAtWaterline` | `true` | Protects pieces at or near the water surface. Useful when global weather protection is disabled. |
+
+### Recommended Settings
+
+**Protect all wooden builds (default)**
+
+```ini
+PreventAllWeatherDamage = true
+ProtectAtWaterline = true
 ```
-Valheim/BepInEx/plugins/cjayride-NoWoodWaterDamage/Cjayride.NoWoodWaterDamage.dll
+
+**Protect only pieces at the waterline**
+
+```ini
+PreventAllWeatherDamage = false
+ProtectAtWaterline = true
 ```
 
-Do not copy `manifest.json`, `README.md`, or `icon.png` into the game.
+**Disable the mod's protection**
 
-Replace `icon.png` (exactly 256×256) before uploading to Thunderstore, Hexium, or Nexus if you are packaging this yourself.
+```ini
+PreventAllWeatherDamage = false
+ProtectAtWaterline = false
+```
+
+## 📥 Installation
+
+Install through your preferred mod manager, or follow the installation instructions in `Package/README.md`.
+
+Remember to install on **both clients and the dedicated server**.
+
+## 💬 Contact
+
+- **X:** [@cjayride](https://x.com/cjayride)
+- **Discord:** [discord.gg/cjayride](https://discord.gg/cjayride) — Find `cjayride` near the top of the user list.
+- **Twitch:** [twitch.tv/cjayride](https://twitch.tv/cjayride)
+
+## 🤖 AI Disclosure
+
+The code was **not AI-generated**. AI was used to help verify compatibility with the updated version of Valheim.
+
