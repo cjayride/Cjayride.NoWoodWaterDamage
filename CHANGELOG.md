@@ -1,3 +1,8 @@
+## 1.1.2
+- Re-verified against installed Valheim 1.0.21 (`assembly_valheim` 10/28/2026, network version 41). `WearNTear.IsWet`, wood/hardwood/timberwood, and rain wear (5% / 60s) are unchanged.
+- Faster default path: skip vanilla `IsWet` / `IsUnderWater` water queries for protected wood.
+- Cache ship-hull detection with `transform.root` instead of `GetComponentInParent` on every wear tick.
+
 ## 1.1.1
 - Verified against Valheim 1.0.21 (Release build).
 - BepInEx dependency set to `denikson-BepInExPack_Valheim-5.4.2360`.
